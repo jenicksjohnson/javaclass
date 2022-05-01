@@ -19,8 +19,7 @@ public class BinarySearchArray {
 		newarr=numOrder(arr);
 		
 		int last=newarr.length-1;
-		int mid=last/2;
-		int res=binarySearch(newarr,key,mid,last);
+		int res=binarySearch(newarr,key,0,last);
         if (res == -1)  
             System.out.println("key is not found");  
         else  
@@ -40,22 +39,21 @@ public class BinarySearchArray {
 		return arr;
 	}
 	
-	static int binarySearch(int[] arr,int key,int mid,int last){
-		if(mid <0 || mid>last) {
-			return -1;
-		}else {
+	static int binarySearch(int[] arr,int key,int first,int last){
+		if(first<=last) {
+			int mid=(first+last)/2;
 			if (arr[mid]==key) {
 				return mid;
 			}else if(key>arr[mid]) {
-				mid+=1;
-				return binarySearch(arr,key,mid,last);
-			}else if(key<arr[mid]) {
-				mid-=1;
-				return binarySearch(arr,key,mid,last);
+				
+				return binarySearch(arr,key,mid+1,last);
 			}else {
-				return -1;
+				
+				return binarySearch(arr,key,0,mid-1);
 			}
-		} 		
+		}else {
+			return -1;
+		}
 	}
 	
 }
